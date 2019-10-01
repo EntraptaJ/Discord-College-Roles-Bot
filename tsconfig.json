@@ -6,8 +6,9 @@
     "outDir": "dist",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "lib": ["esnext", "dom"]
   },
   "include": ["src", "**/State.json"],
-  "exclude": ["node_modules", "**/__tests__/*", "dist"]
+  "exclude": ["node_modules", "dist"]
 }

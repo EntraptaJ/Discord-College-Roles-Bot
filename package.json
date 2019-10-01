@@ -9,6 +9,25 @@
     "start": "ts-node src/index.ts",
     "build": "tsc"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testRegex": "(/__tests__/).*(test|spec)\\.ts",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KristianFJones/Discord-College-Roles-Bot.git"
@@ -21,14 +40,19 @@
   "devDependencies": {
     "@types/cron": "^1.7.1",
     "@types/fs-extra": "^8.0.0",
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.7.8",
     "fs-extra": "^8.1.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "ts-lib": "0.0.5",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
   },
   "dependencies": {
     "cron": "^1.7.2",
     "date-fns": "^2.4.1",
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "isomorphic-unfetch": "^3.0.0"
   }
 }

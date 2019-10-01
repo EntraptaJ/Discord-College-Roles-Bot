@@ -3,12 +3,12 @@ import { State, updateUser, UserState, saveState } from './State';
 import { isPast, parseISO } from 'date-fns';
 
 export enum ROLE {
-  // @ts-ignore
-  FIRST = process.env.FIRST_YEAR!,
-  SECOND = `${process.env.SECOND_YEAR!}` as any,
-  GRADUATED = `${process.env.GRADUATED!}` as any
+  FIRST = process.env.FIRST_YEAR! as any,
+  SECOND = process.env.SECOND_YEAR! as any,
+  GRADUATED = process.env.GRADUATED! as any
 }
-export async function postdatedRoles(state: State): Promise<void> {
+
+export async function postdatedRoles(state: State): Promise<State> {
   let users: UserState[] = [];
 
   for (let user of state.users) {
@@ -18,5 +18,5 @@ export async function postdatedRoles(state: State): Promise<void> {
   }
 
   state.users = users;
-  await saveState(state);
+  return state;
 }

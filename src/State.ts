@@ -3,7 +3,7 @@ import { ROLE } from './Role';
 import { outputJSON, readJSON, pathExists } from 'fs-extra';
 import { GuildMember } from 'discord.js';
 import { addYears } from 'date-fns';
-import { client } from '.';
+import { client } from './Discord';
 
 export interface UserState {
   role: ROLE;
@@ -30,13 +30,18 @@ export async function loadState(): Promise<State | undefined> {
   else return readJSON(STATE_PATH);
 }
 
-export async function addUser(discordUser: GuildMember): Promise<void> {
-  let state = await loadState();
+export async function addUser(
+  discordUser: GuildMember,
+  state: State
+): Promise<State> {
   let user: UserState;
+
   if (state) {
     user = state.users.find(({ userId }) => userId === discordUser.id);
+
     if (!user) {
-      discordUser.addRole((ROLE.FIRST as unknown) as string);
+      await discordUser.addRole((ROLE.FIRST as unknown) as string);
+
       user = {
         userId: discordUser.id,
         updateDate: addYears(new Date(), 1).toISOString(),
@@ -45,21 +50,23 @@ export async function addUser(discordUser: GuildMember): Promise<void> {
       };
     }
   } else {
-    discordUser.addRole((ROLE.FIRST as unknown) as string);
+    await discordUser.addRole((ROLE.FIRST as unknown) as string);
+
     user = {
       userId: discordUser.id,
       updateDate: addYears(new Date(), 1).toISOString(),
       role: ROLE.FIRST,
       guildId: discordUser.guild.id
     };
+
     state = { users: [user] };
   }
 
-  await saveState(state);
+  return state;
 }
 
 export async function updateUser(userState: UserState): Promise<UserState> {
-  await client.syncGuilds();
+  client.syncGuilds();
 
   const user = await client.guilds
     .get(userState.guildId)

@@ -1,22 +1,23 @@
 // src/index.ts
-import { Client } from 'discord.js';
-import { postdatedRoles } from './Role';
-import { loadState, addUser } from './State';
 import { CronJob } from 'cron';
-
-export const client = new Client();
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+import { client, connectDiscord } from './Discord';
+import { postdatedRoles } from './Role';
+import { addUser, loadState } from './State';
+import { outputFile, readJSON } from 'fs-extra';
 
 async function startBot(): Promise<void> {
   const appState = await loadState();
 
   console.log('Starting Discord Bot');
-  client.on('guildMemberAdd', member => {
+  client.on('guildMemberAdd', async member => {
     console.log('New Member Added\nMember: ', member);
-    addUser(member);
+    await outputFile(
+      'state.json',
+      addUser(member, await readJSON('state.json'))
+    );
   });
 
-  await client.login(DISCORD_TOKEN);
+  await connectDiscord();
   console.log('Connected to Discord');
   if (appState) postdatedRoles(appState);
 }
