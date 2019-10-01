@@ -15,11 +15,11 @@ jobs:
         uses: KristianFJones/npm-run-action@alternative
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          FIRST_YEAR: 628386864352460836
-          SECOND_YEAR: 628386928831627274
-          GRADUATED: 628393889035845653
-          TEST_USER: 628386142076796948
-          TEST_GUILD: 198215820223053825
+          FIRST_YEAR: '628386864352460836'
+          SECOND_YEAR: '628386928831627274'
+          GRADUATED: '628393889035845653'
+          TEST_USER: '628386142076796948'
+          TEST_GUILD: '198215820223053825'
         with:
           scriptName: 'test'
           scriptPath: './'
