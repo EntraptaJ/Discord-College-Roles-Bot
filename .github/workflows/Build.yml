@@ -12,7 +12,7 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
           dockerfile: Dockerfile
-          name: docker.pkg.github.com/KristianFJones/Discord-College-Roles-Bot/bot:latest
+          name: docker.pkg.github.com/KristianFJones/Discord-College-Roles-Bot/bot
           username: ${{ secrets.DOCKER_GITHUB_USERNAME }}
           password: ${{ secrets.DOCKER_GITHUB_PASSWORD }}
           registry: docker.pkg.github.com
