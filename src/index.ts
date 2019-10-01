@@ -2,6 +2,7 @@
 import { Client } from 'discord.js';
 import { postdatedRoles } from './Role';
 import { loadState, addUser } from './State';
+import { CronJob } from 'cron';
 
 export const client = new Client();
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
@@ -21,3 +22,11 @@ async function startBot(): Promise<void> {
 }
 
 startBot();
+
+new CronJob(
+  '0 3 * * *',
+  async () => postdatedRoles(await loadState()),
+  undefined,
+  true,
+  `America/Winnipeg`
+);

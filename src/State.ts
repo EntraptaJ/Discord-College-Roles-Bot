@@ -48,7 +48,7 @@ export async function addUser(discordUser: GuildMember): Promise<void> {
     discordUser.addRole(ROLE.FIRST);
     user = {
       userId: discordUser.id,
-      updateDate: subYears(new Date(), 1).toISOString(),
+      updateDate: addYears(new Date(), 1).toISOString(),
       role: ROLE.FIRST,
       guildId: discordUser.guild.id
     };
@@ -71,7 +71,7 @@ export async function updateUser(userState: UserState): Promise<UserState> {
     userState = {
       ...userState,
       role: ROLE.SECOND,
-      updateDate: subYears(new Date(), 1).toISOString()
+      updateDate: addYears(new Date(), 1).toISOString()
     };
   } else if (userState.role === ROLE.SECOND) {
     await Promise.all([
