@@ -22,4 +22,4 @@ jobs:
           TEST_GUILD: 198215820223053825
         with:
           scriptName: 'test'
-          scriptPath: ''
+          scriptPath: './'
