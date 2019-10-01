@@ -2,7 +2,7 @@
 import { ROLE } from './Role';
 import { outputJSON, readJSON, pathExists } from 'fs-extra';
 import { GuildMember } from 'discord.js';
-import { addYears, subYears } from 'date-fns';
+import { addYears } from 'date-fns';
 import { client } from '.';
 
 export interface UserState {
@@ -36,7 +36,7 @@ export async function addUser(discordUser: GuildMember): Promise<void> {
   if (state) {
     user = state.users.find(({ userId }) => userId === discordUser.id);
     if (!user) {
-      discordUser.addRole(ROLE.FIRST);
+      discordUser.addRole((ROLE.FIRST as unknown) as string);
       user = {
         userId: discordUser.id,
         updateDate: addYears(new Date(), 1).toISOString(),
@@ -45,7 +45,7 @@ export async function addUser(discordUser: GuildMember): Promise<void> {
       };
     }
   } else {
-    discordUser.addRole(ROLE.FIRST);
+    discordUser.addRole((ROLE.FIRST as unknown) as string);
     user = {
       userId: discordUser.id,
       updateDate: addYears(new Date(), 1).toISOString(),
@@ -66,7 +66,10 @@ export async function updateUser(userState: UserState): Promise<UserState> {
     .fetchMember(userState.userId);
 
   if (userState.role === ROLE.FIRST) {
-    await Promise.all([user.removeRole(ROLE.FIRST), user.addRole(ROLE.SECOND)]);
+    await Promise.all([
+      user.removeRole((ROLE.FIRST as unknown) as string),
+      user.addRole((ROLE.SECOND as unknown) as string)
+    ]);
 
     userState = {
       ...userState,
@@ -75,8 +78,8 @@ export async function updateUser(userState: UserState): Promise<UserState> {
     };
   } else if (userState.role === ROLE.SECOND) {
     await Promise.all([
-      user.removeRole(ROLE.SECOND),
-      user.addRole(ROLE.GRADUATED)
+      user.removeRole((ROLE.SECOND as unknown) as string),
+      user.addRole((ROLE.GRADUATED as unknown) as string)
     ]);
 
     userState = { ...userState, role: ROLE.GRADUATED, updateDate: undefined };
