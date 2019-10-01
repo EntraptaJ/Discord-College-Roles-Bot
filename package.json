@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
