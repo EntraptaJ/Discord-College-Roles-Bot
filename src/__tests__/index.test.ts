@@ -17,6 +17,8 @@ describe('Auto College Roles', () => {
 
     beforeEach(async () => {
       await remove('state.json');
+      console.log(TEST_GUILD);
+      client.syncGuilds();
       user = await client.guilds.get(TEST_GUILD).fetchMember(TEST_USER);
 
       await user.removeRoles([...user.roles.array()]);
