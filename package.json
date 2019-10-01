@@ -1,0 +1,31 @@
+{
+  "name": "auto-college-roles",
+  "version": "0.0.1",
+  "description": "Confederation College Discord Roles Bot",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "start": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KristianFJones/Discord-College-Roles-Bot.git"
+  },
+  "keywords": [
+    "Discord"
+  ],
+  "author": "Kristian Jones <me@kristianjones.dev>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "^8.0.0",
+    "@types/node": "^12.7.8",
+    "fs-extra": "^8.1.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "date-fns": "^2.4.1",
+    "discord.js": "^11.5.1"
+  }
+}
