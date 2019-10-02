@@ -20,7 +20,6 @@ describe('Auto College Roles', () => {
       console.log(TEST_GUILD);
       client.syncGuilds();
       user = await client.guilds.get(TEST_GUILD).fetchMember(TEST_USER);
-
       await user.removeRoles([...user.roles.array()]);
     });
 
