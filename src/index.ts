@@ -11,10 +11,7 @@ async function startBot(): Promise<void> {
   console.log('Starting Discord Bot');
   client.on('guildMemberAdd', async member => {
     console.log('New Member Added\nMember: ', member);
-    await outputFile(
-      'state.json',
-      addUser(member, await readJSON('state.json'))
-    );
+    await outputFile('state.json', addUser(member, await loadState()));
   });
 
   await connectDiscord();
